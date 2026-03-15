@@ -1,12 +1,18 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { setMiddleBottomWindowHeight } from '../../../workspaceSlice';
-import { useState } from 'react';
-import styles from './BottomWorkspaceShell.module.css';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setMiddleBottomWindowHeight,
+  setLeftBottomWindowHeight,
+  setRightBottomWindowHeight
+} from "../../../workspaceSlice";
 
-export default function SecondaryWorkSpace({ children }) {
+import { useState } from "react";
+import styles from "./BottomWorkspaceShell.module.css";
+
+export default function BottomWorkspaceShell({ children, view = "mid" }) {
   const dispatch = useDispatch();
+
   const { height, minHeight, maxHeight } = useSelector(
-    (state) => state.workspace.bottomWindowViewData.midView
+    (state) => state.workspace.bottomWindowViewData[`${view}View`]
   );
 
   const [dragHeight, setDragHeight] = useState(height);
@@ -19,24 +25,44 @@ export default function SecondaryWorkSpace({ children }) {
     const startHeight = height;
 
     const onMouseMove = (eMove) => {
-      const delta = startY - eMove.clientY;
-      // clamp height between minHeight and maxHeight
+      let delta;
+      if (view === "left" || view === "right") {
+        // flip delta for side panels so dragging up increases height
+        delta = startY - eMove.clientY;
+      } else {
+        delta = startY - eMove.clientY; // middle panel behaves normally
+      }
+
       const newHeight = Math.max(minHeight, Math.min(maxHeight, startHeight + delta));
       setDragHeight(newHeight);
     };
 
     const onMouseUp = (eUp) => {
-      const delta = startY - eUp.clientY;
-      const finalHeight = Math.max(minHeight, Math.min(maxHeight, startHeight + delta));
-      dispatch(setMiddleBottomWindowHeight(finalHeight));
-      setDragHeight(finalHeight);
+      let delta;
+      if (view === "left") {
+        delta = startY - eUp.clientY;
+        const finalHeight = Math.max(minHeight, Math.min(maxHeight, startHeight + delta));
+        dispatch(setLeftBottomWindowHeight(finalHeight));
+        setDragHeight(finalHeight);
+      } else if (view === "right") {
+        delta = startY - eUp.clientY;
+        const finalHeight = Math.max(minHeight, Math.min(maxHeight, startHeight + delta));
+        dispatch(setRightBottomWindowHeight(finalHeight));
+        setDragHeight(finalHeight);
+      } else {
+        delta = startY - eUp.clientY;
+        const finalHeight = Math.max(minHeight, Math.min(maxHeight, startHeight + delta));
+        dispatch(setMiddleBottomWindowHeight(finalHeight));
+        setDragHeight(finalHeight);
+      }
+
       setDragging(false);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
     };
 
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
   };
 
   return (
@@ -44,10 +70,13 @@ export default function SecondaryWorkSpace({ children }) {
       className={styles.secondaryPanel}
       style={{
         height: dragging ? dragHeight : height,
-        maxHeight: `calc(100vh - 50px)`, // ensure it never exceeds viewport
+        maxHeight: "calc(100vh - 50px)",
       }}
     >
-      <div className={styles.resizeHandle} onMouseDown={startResize} />
+      <div
+        className={styles.resizeHandle}
+        onMouseDown={startResize}
+      />
       <div className={styles.panelContent}>
         {children}
       </div>

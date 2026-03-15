@@ -56,12 +56,29 @@ function createWindow(windowId, defaultTabId, template="Default") {
   };
 }
 
+/*
+MIDDLE WINDOWS
+*/
+
 const midTopWindow = createWindow("midTop", "default-2a", "Scanner");
-midTopWindow.tabs["default-2a"].data.scannerName = "topAltcoins"; // 👈 override
+midTopWindow.tabs["default-2a"].data.scannerName = "topAltcoins";
 
 const midBottomWindow = createWindow("midBottom", "default-2b", "Scanner");
-midBottomWindow.tabs["default-2b"].data.scannerName = "topFiveCrypto"; // 👈 override
+midBottomWindow.tabs["default-2b"].data.scannerName = "topFiveCrypto";
 
+/*
+LEFT WINDOWS
+*/
+
+const leftTopWindow = createWindow("leftTop", "default-1a", "Scanner");
+leftTopWindow.tabs["default-1a"].data.scannerName = "largeCapCrypto";
+
+const leftBottomWindow = createWindow("leftBottom", "default-1b", "Scanner");
+leftBottomWindow.tabs["default-1b"].data.scannerName = "defiLeaders";
+
+/*
+INITIAL STATE
+*/
 
 const initialState = {
 
@@ -86,8 +103,8 @@ const initialState = {
 
   windowLayouts: {
 
-    leftTop: createWindow("leftTop", "default-1a", "Scanner"),
-    leftBottom: createWindow("leftBottom", "default-1b", "Notes"),
+    leftTop: leftTopWindow,
+    leftBottom: leftBottomWindow,
 
     midTop: midTopWindow,
     midBottom: midBottomWindow,

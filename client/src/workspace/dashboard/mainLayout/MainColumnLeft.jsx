@@ -1,11 +1,10 @@
 import SideColumnShell from "./sideColumnShells/SideColumnShell";
+import LeftColumnLayoutMain from "../columnLayoutLeft/LeftColumnLayoutMain";
 
 export default function MainColumnLeft() {
-  // const panelType = useSelector((state) => state.workspace.leftPanel.config.type);
-
   return (
     <SideColumnShell panel="leftPanel" direction="left">
-      
+      <LeftColumnLayoutMain />
     </SideColumnShell>
   );
 }

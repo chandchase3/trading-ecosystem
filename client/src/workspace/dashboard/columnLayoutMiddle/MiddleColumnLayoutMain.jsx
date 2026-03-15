@@ -12,15 +12,13 @@ export default function MiddleColumnLayoutMain() {
 
   return (
     <>
-      <TopWorkspaceShell>
+      <TopWorkspaceShell view="mid">
         <MiddleWindowLayoutTop />
       </TopWorkspaceShell>
 
-      {visible && (
-        <BottomWorkspaceShell>
-          <MiddleWindowLayoutBottom />
-        </BottomWorkspaceShell>
-      )}
+      <BottomWorkspaceShell view="mid">
+        <MiddleWindowLayoutBottom />
+      </BottomWorkspaceShell>
     </>
   );
 }

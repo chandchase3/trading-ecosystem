@@ -4,7 +4,7 @@ import styles from './SideColumnShell.module.css';
 
 export default function SideColumnShell({ panel, direction, children }) {
   const dispatch = useDispatch();
-  const state = useSelector(s => s.workspace[panel]);
+  const state = useSelector((s) => s.workspace[panel]);
 
   if (!state.visible) return null;
 
@@ -14,11 +14,7 @@ export default function SideColumnShell({ panel, direction, children }) {
     const startWidth = state.width;
 
     const onMove = (ev) => {
-      const delta =
-        direction === 'left'
-          ? ev.clientX - startX
-          : startX - ev.clientX;
-
+      const delta = direction === 'left' ? ev.clientX - startX : startX - ev.clientX;
       const newWidth = startWidth + delta;
 
       if (panel === 'leftPanel') {
@@ -38,19 +34,15 @@ export default function SideColumnShell({ panel, direction, children }) {
   };
 
   return (
-    <div
-      className={`${styles.panel} ${state.overlay ? styles.overlay : ''}`}
-      style={{ width: state.width }}
-    >
+    <div className={styles.panel} style={{ width: state.width }}>
       <div className={styles.content}>
-        {children}
+        {children /* LeftColumnLayoutMain will render Top + Bottom Workspace */}
       </div>
-
       <div
         className={styles.resizeHandle}
         style={{
           right: direction === 'left' ? 0 : 'auto',
-          left: direction === 'right' ? 0 : 'auto'
+          left: direction === 'right' ? 0 : 'auto',
         }}
         onMouseDown={startResize}
       />

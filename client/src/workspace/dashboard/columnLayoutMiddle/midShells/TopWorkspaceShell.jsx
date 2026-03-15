@@ -1,18 +1,12 @@
-import { useSelector } from 'react-redux';
-import styles from '../../MainLayout/MainLayout.module.css';
+import { useSelector } from "react-redux";
+import styles from "../../MainLayout/MainLayout.module.css";
 
-export default function TopWorkspaceShell({ children }) {
-  const workspace = useSelector((state) => state.workspace);
+export default function TopWorkspaceShell({ children, view = "mid" }) {
+  const viewState = useSelector(
+    (state) => state.workspace.bottomWindowViewData[`${view}View`]
+  );
 
-  const {
-    overlay,
-    height: secondaryHeight,
-    visible: secondaryVisible,
-    dragHeight,
-    dragging,
-  } = workspace.bottomWindowViewData.midView;
-
-  const liveBottomHeight = dragging ? dragHeight : secondaryHeight;
+  const { overlay, height: secondaryHeight, visible: secondaryVisible } = viewState;
 
   return (
     <div
@@ -20,16 +14,11 @@ export default function TopWorkspaceShell({ children }) {
       style={{
         flex: 1,
         minHeight: 0,
-        overflowY: 'auto',
-        paddingBottom:
-          secondaryVisible && !overlay
-            ? `${liveBottomHeight}px`
-            : '0px',
+        overflowY: "auto",
+        paddingBottom: secondaryVisible && !overlay ? `${secondaryHeight}px` : "0px",
       }}
     >
-      <main className={styles.mainContent}>
-        {children}
-      </main>
+      <main className={styles.mainContent}>{children}</main>
     </div>
   );
 }

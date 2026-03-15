@@ -54,3 +54,11 @@
 .resizeHandle:hover {
   background: rgba(255, 255, 255, 0.15);
 } */
+
+.mainContentWrapper {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1; /* make sure it's under the bottom panel */
+}
