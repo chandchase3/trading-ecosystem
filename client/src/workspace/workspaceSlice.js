@@ -56,6 +56,13 @@ function createWindow(windowId, defaultTabId, template="Default") {
   };
 }
 
+const midTopWindow = createWindow("midTop", "default-2a", "Scanner");
+midTopWindow.tabs["default-2a"].data.scannerName = "topAltcoins"; // 👈 override
+
+const midBottomWindow = createWindow("midBottom", "default-2b", "Scanner");
+midBottomWindow.tabs["default-2b"].data.scannerName = "topFiveCrypto"; // 👈 override
+
+
 const initialState = {
 
   topNav: { visible: true, height: 50 },
@@ -82,8 +89,8 @@ const initialState = {
     leftTop: createWindow("leftTop", "default-1a", "Scanner"),
     leftBottom: createWindow("leftBottom", "default-1b", "Notes"),
 
-    midTop: createWindow("midTop", "default-2a", "Chart"),
-    midBottom: createWindow("midBottom", "default-2b", "Scanner"),
+    midTop: midTopWindow,
+    midBottom: midBottomWindow,
 
     rightTop: createWindow("rightTop", "default-3a", "Watchlist"),
     rightBottom: createWindow("rightBottom", "default-3b", "Alerts"),
