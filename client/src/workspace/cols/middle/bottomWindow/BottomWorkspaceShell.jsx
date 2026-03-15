@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setMidBottomWindowHeight } from '../workspaceSlice';
+import { setMidBottomWindowHeight } from '../../../workspaceSlice';
 import { useState } from 'react';
 import styles from './BottomWorkspaceShell.module.css';
 
 export default function SecondaryWorkSpace({ children }) {
   const dispatch = useDispatch();
   const { height, minHeight, maxHeight } = useSelector(
-    (state) => state.workspace.midBottomWindow
+    (state) => state.workspace.bottomWindowViewData.midView
   );
 
   const [dragHeight, setDragHeight] = useState(height);

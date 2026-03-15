@@ -2,20 +2,18 @@ import { useSelector } from 'react-redux';
 import TopNav from './navbars/TopNav';
 import BottomNav from './navbars/BottomNav';
 import RightPanelContent from './content/RightPanelContent';
-import BottomWorkspaceContent from './content/BottomWorkspaceContent';
 import LeftPanelContent from './content/LeftPanelContent';
 import styles from './MainLayout.module.css';
-import TopWorkspaceContent from './content/TopWorkspaceContent';
-import MidCol from './cols/MidCol';
+import MidColLayout from './cols/middle/MidColLayout';
 
 export default function MainLayout() {
   const workspace = useSelector((state) => state.workspace);
-  const { overlay, height: secondaryHeight, visible: secondaryVisible, dragHeight, dragging } =workspace.midBottomWindow;
+  // const { overlay, height: secondaryHeight, visible: secondaryVisible, dragHeight, dragging } =workspace.bottomWindowViewData.midView;
 
-  const { visible: bottomVisible, height: bottomHeight } = workspace.bottomNav;
+  // const { visible: bottomVisible, height: bottomHeight } = workspace.bottomNav;
 
   // says liveBottomHeight is not used, do we need it?
-  const liveBottomHeight = dragging ? dragHeight : secondaryHeight;
+  // const liveBottomHeight = dragging ? dragHeight : secondaryHeight;
 
   return (
     <div className={styles.container}>
@@ -24,11 +22,7 @@ export default function MainLayout() {
       <div className={styles.body}>
         {workspace.leftPanel.visible && <LeftPanelContent panel="leftPanel" />}
 
-        <MidCol />
-        {/* <div className={styles.mainColumn}>
-          <TopWorkspaceContent />
-          {secondaryVisible && <BottomWorkspaceContent />}
-        </div> */}
+        <MidColLayout />
 
         {workspace.rightPanel.visible && <RightPanelContent />}
       </div>

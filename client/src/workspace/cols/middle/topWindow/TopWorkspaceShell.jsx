@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import styles from '../MainLayout.module.css';
+import styles from '../../../MainLayout.module.css';
 
 export default function TopWorkspaceShell({ children }) {
   const workspace = useSelector((state) => state.workspace);
@@ -10,7 +10,7 @@ export default function TopWorkspaceShell({ children }) {
     visible: secondaryVisible,
     dragHeight,
     dragging,
-  } = workspace.midBottomWindow;
+  } = workspace.bottomWindowViewData.midView;
 
   const liveBottomHeight = dragging ? dragHeight : secondaryHeight;
 
