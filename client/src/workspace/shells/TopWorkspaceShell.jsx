@@ -10,7 +10,7 @@ export default function TopWorkspaceShell({ children }) {
     visible: secondaryVisible,
     dragHeight,
     dragging,
-  } = workspace.secondaryPanel;
+  } = workspace.midBottomWindow;
 
   const liveBottomHeight = dragging ? dragHeight : secondaryHeight;
 

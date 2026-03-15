@@ -3,12 +3,11 @@ const initialState = {
   topNav: { visible: true, height: 50 },
   bottomNav: { visible: true, height: 50 },
 
-  // Side panels with fully dynamic config
   leftPanel: {
     config: {
-      type: "splt",        // simple | singleFeature | split | widgetPanel
-      feature: "scanner",         // e.g., "watchlist", "scanner"
-      widgets: [],           // optional array for future widget panels
+      type: "splt",
+      feature: "scanner",
+      widgets: [],
     },
     visible: true,
     width: 200,
@@ -28,8 +27,7 @@ const initialState = {
     maxWidth: 1700,
   },
 
-  // Secondary workspace (default overlay)
-  secondaryPanel: {
+  midBottomWindow: {
     visible: true,
     overlay: true,
     height: 200,
@@ -55,15 +53,15 @@ const workspaceSlice = createSlice({
     },
 
     // Secondary panel
-    setSecondaryHeight(state, action) {
+    setMidBottomWindowHeight(state, action) {
       const h = action.payload;
-      state.secondaryPanel.height = Math.max(state.secondaryPanel.minHeight, Math.min(h, state.secondaryPanel.maxHeight));
+      state.midBottomWindow.height = Math.max(state.midBottomWindow.minHeight, Math.min(h, state.midBottomWindow.maxHeight));
     },
-    toggleSecondaryVisible(state) {
-      state.secondaryPanel.visible = !state.secondaryPanel.visible;
+    toggleMidBottomWindowVisible(state) {
+      state.midBottomWindow.visible = !state.midBottomWindow.visible;
     },
   },
 });
 
-export const { toggleLeftPanel, toggleRightPanel, setLeftPanelWidth, setRightPanelWidth, setSecondaryHeight, toggleSecondaryVisible } = workspaceSlice.actions;
+export const { toggleLeftPanel, toggleRightPanel, setLeftPanelWidth, setRightPanelWidth, setMidBottomWindowHeight, toggleMidBottomWindowVisible } = workspaceSlice.actions;
 export default workspaceSlice.reducer;
