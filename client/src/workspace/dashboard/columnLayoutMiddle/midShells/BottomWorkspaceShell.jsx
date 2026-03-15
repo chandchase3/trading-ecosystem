@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setMidBottomWindowHeight } from '../../../workspaceSlice';
+import { setMiddleBottomWindowHeight } from '../../../workspaceSlice';
 import { useState } from 'react';
 import styles from './BottomWorkspaceShell.module.css';
 
@@ -28,7 +28,7 @@ export default function SecondaryWorkSpace({ children }) {
     const onMouseUp = (eUp) => {
       const delta = startY - eUp.clientY;
       const finalHeight = Math.max(minHeight, Math.min(maxHeight, startHeight + delta));
-      dispatch(setMidBottomWindowHeight(finalHeight));
+      dispatch(setMiddleBottomWindowHeight(finalHeight));
       setDragHeight(finalHeight);
       setDragging(false);
       window.removeEventListener('mousemove', onMouseMove);

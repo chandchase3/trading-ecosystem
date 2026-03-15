@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { defaultTabs } from './panels/defaultPanels/defaultTabs';
+import { defaultTabs } from './dashboard/windows/defaultPanels/defaultTabs';
 
 /*
 TAB FACTORY
@@ -11,22 +11,17 @@ function createTab(windowId, tabId, templateName = "Default") {
   return {
     id: tabId,
     windowId,
-
     name: template.name,
     viewType: template.viewType,
-
     ui: {
       tabColor: template.tabColor,
       icon: template.icon
     },
-
     theme: {
       background: "#111",
       text: "#fff"
     },
-
     data: { ...template.data },
-
     meta: {
       createdAt: Date.now(),
       pinned: false,
@@ -161,7 +156,7 @@ const workspaceSlice = createSlice({
       );
     },
 
-    setMidBottomWindowHeight(state, action) {
+    setMiddleBottomWindowHeight(state, action) {
 
       const view = state.bottomWindowViewData.midView;
       const h = action.payload;
@@ -172,7 +167,7 @@ const workspaceSlice = createSlice({
       );
     },
 
-    toggleMidBottomWindowVisible(state) {
+    toggleMiddleBottomWindowVisible(state) {
       state.bottomWindowViewData.midView.visible =
         !state.bottomWindowViewData.midView.visible;
     },
@@ -218,8 +213,8 @@ export const {
   toggleRightPanel,
   setLeftPanelWidth,
   setRightPanelWidth,
-  setMidBottomWindowHeight,
-  toggleMidBottomWindowVisible,
+  setMiddleBottomWindowHeight,
+  toggleMiddleBottomWindowVisible,
   setLeftBottomWindowHeight,
   toggleLeftBottomWindowVisible,
   setRightBottomWindowHeight,

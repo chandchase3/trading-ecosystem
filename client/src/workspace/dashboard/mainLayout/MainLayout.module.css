@@ -21,7 +21,6 @@
   position: relative;
 }
 
-
 .mainContentWrapper {
   flex: 1;       /* height is explicitly set by JS */
   overflow-y: auto;

@@ -1,6 +1,5 @@
 // src/pages/LayoutsPage.jsx
-import React from 'react';
-import MainLayout from '../workspace/MainLayout';
+import MainLayout from '../workspace/dashboard/mainLayout/MainLayout';
 
 export default function LayoutsPage() {
   return (
